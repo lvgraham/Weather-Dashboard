@@ -20,3 +20,7 @@ h1{
     margin-bottom: 20px;
 }
 
+.forecast{
+    background-color: blue;
+    color: white;
+}

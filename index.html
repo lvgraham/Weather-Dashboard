@@ -14,7 +14,7 @@
 
     <div class="container-fluid">
         <div class="row header">
-            <div class="col-12">
+            <div class="col-sm-12">
                 <h1>Weather Dashboard</h1>
             </div>
         </div>
@@ -22,18 +22,19 @@
         <div class="row">
 
             <!--this is the search bar-->
-            <div class="col-3">
-                <form class="col-3 form-inline searchBoxForm">
+            <div class="col-sm-3">
+                <form class="col-sm-3 form-inline searchBoxForm">
                 <div class="form-group mb-2">
                 <label for="searchBox" class="sr-only">Search</label>
-                <input type="search" class="form-control" id="searchBox" placeholder="Austin, Tx">
+                <input type="search" class="form-control" id="cityName" placeholder="Austin, Tx">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Search</button>
+                <p id="error"></p>
+                <button id="searchWeather" type="submit" class="btn btn-primary mb-2">Search</button>
                 </form>
             </div>
 
             <!--this is the card that will show the weather for the city that is searched-->
-            <div class="col-9">
+            <div class="col-sm-9">
                 <div class="card currentWeather">
                     <div class="card-body">
                         this is the current weather
@@ -43,37 +44,37 @@
                 <!--this will be the 5-day forecast cards-->
                 <h4>5 day forecast:</h4>
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-sm-2">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body forecast">
                                 forecast
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-sm-2">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body forecast">
                                 forecast
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-sm-2">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body forecast">
                                 forecast
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-sm-2 ">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body forecast">
                                 forecast
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-sm-2">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body forecast">
                                 forecast
                             </div>
                         </div>
@@ -83,5 +84,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

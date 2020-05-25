@@ -1,0 +1,16 @@
+What do we need in this project?
+1. a header
+2. a searchbar
+    2.1 cities searched save under the search bar for quicksearch
+3. diplay of searched cities current weather
+4. 5 day forecast
+
+Steps:
+
+1. build out html/css
+2. make search functionality 
+3. create list of searched terms to save under the searchbar
+4. create div showing current searched city weather (city, date, temp, humidity, wind speed, UV index)
+5. create divs for 5-day forecast information 
+    5.1 probably need a loop to create 5 separate cards showing the information
+

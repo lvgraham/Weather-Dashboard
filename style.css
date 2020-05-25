@@ -1,0 +1,22 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: darkblue;
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+.currentWeather{
+    margin-bottom: 20px;
+}
+

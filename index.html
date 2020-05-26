@@ -26,7 +26,7 @@
                 <form class="col-sm-3 form-inline searchBoxForm">
                 <div class="form-group mb-2">
                 <label for="searchBox" class="sr-only">Search</label>
-                <input type="search" class="form-control" id="cityName" placeholder="Austin, Tx">
+                <input type="text" class="form-control" id="cityName" placeholder="Austin, Tx">
                 </div>
                 <p id="error"></p>
                 <button id="searchWeather" type="submit" class="btn btn-primary mb-2">Search</button>
@@ -37,7 +37,10 @@
             <div class="col-sm-9">
                 <div class="card currentWeather">
                     <div class="card-body">
-                        this is the current weather
+                        <p class="city"></p>
+                        <p class="wind"></p>
+                        <p class="humidity"></p>
+                        <p class="tempF"></p>
                     </div>
                 </div>
 

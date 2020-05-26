@@ -1,30 +1,31 @@
 let searchBtn = document.querySelector('#searchWeather')
 
-function searchCity(){
+//need to get the city name from the search bar
+let cityName = document.getElementById('cityName');
 
-    let city = $('#cityName').val()
+searchBtn.addEventListener("click", function(){
+
+    event.preventDefault();
+
+    let city = cityName.value;
+    console.log(city);
 
     const APIKey = "d367dcfadab5440b10dca09382825e01";
-    const queryURL = 'api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + APIKey;
-    
-    if (city != ''){
+    const queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-        $.ajax({
-            url:queryURL,
-            method:"get"
-        }).then(function(response){
-            console.log(queryURL);
-            console.log(response);
-        
-        })
+    $.ajax({
+        url:queryURL,
+        method:"GET"
+    }).then(function(response){
+        console.log(queryURL);
+        console.log(response);
 
-    }else{
+        $(".city").html('<h1>' + response.name + ' Weather Details</h1>');
+        $(".wind").text('Wind speed: ' + response.wind.speed);
+        $(".humidity").text('Humidity: ' + response.main.humidity);
+    })
 
-    }
-  
-}
-
-searchBtn.addEventListener("click", searchCity());
+});
 
 
 

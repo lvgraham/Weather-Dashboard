@@ -14,7 +14,7 @@
 
     <div class="container-fluid">
         <div class="row header">
-            <div class="col-sm-12">
+            <div class="col-sm-12 header-text">
                 <h1>Weather Dashboard</h1>
             </div>
         </div>
@@ -38,14 +38,15 @@
                 <div class="card currentWeather">
                     <div class="card-body">
                         <p class="city"></p>
-                        <p class="wind"></p>
-                        <p class="humidity"></p>
                         <p class="tempF"></p>
+                        <p class="humidity"></p>
+                        <p class="wind"></p>
+                        <p class="UV"></p>
                     </div>
                 </div>
 
                 <!--this will be the 5-day forecast cards-->
-                <h4>5 day forecast:</h4>
+                <h4 class="hide">5 day forecast:</h4>
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="card">
@@ -89,6 +90,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src = "moment.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

@@ -18,9 +18,11 @@
 
 .currentWeather{
     margin-bottom: 20px;
+    border: none;
 }
 
 .forecast{
     background-color: blue;
     color: white;
 }
+

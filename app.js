@@ -35,15 +35,35 @@ searchBtn.addEventListener("click", function(){
         $(".UV").text('UV Index: ');
     })
 
+    //creating variable for 5-day forecast API
     const queryURL2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
     console.log(queryURL2);
 
-    // $.ajax({
-    //     url:queryURL,
-    //     method:"GET"
-    // }).then(function(response){
-    //     console.log(response);
+    $.ajax({
+        url:queryURL2,
+        method:"GET"
+    }).then(function(response){
+        console.log(response);
 
+        //pulling information for 5-day forecast
+        for (let i = 0; i < response.list.length; i ++){
+
+            let now = moment();
+            $('.day' + i).text((now.format('MM-DD-YYYY')));
+
+            //converting temp to F
+            let temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
+
+            $('.temp' + i).text('Temp (F): ' + temp.toFixed(2));
+            $('.humid' + i).text('Humidity: ' + response.list[i].main.humidity + '%');
+            // $('.temp' + i).text(response.list[i].main.temp );
+        }
+
+       
+
+
+
+    });
     //     //using moment.js to get current date
     //     let now = moment();
     //     //converting kelvin temp to farenheight
@@ -62,7 +82,4 @@ searchBtn.addEventListener("click", function(){
 
 
 
-    //start of the forloop to create the 5-day forecast
-    // for(i = 5; i <= 5; i++){
-
-    // }
+   

@@ -25,3 +25,44 @@
     color: white;
 }
 
+.uvText{
+    display: inline-block;
+}
+
+.low{
+    background-color: lightgreen;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.medium{
+    background-color: yellow;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.high{
+    background-color: orange;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.vHigh{
+    background-color: red;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+
+}
+
+.extreme{
+    background-color: purple;
+    color: white;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+}
+

@@ -51,9 +51,20 @@ searchBtn.addEventListener("click", function(){
             let uv = uvresponse.value;
 
             //adding UV data to current weather information
-            $(".UV").text('UV Index: ' + uv);
+            $(".uvText").text('UV Index: ');
+            $('.UV').html(uv);
 
-            
+            if (uv < 3){
+                $('.UV').addClass('low')
+            }else if (uv > 3 && uv < 6){
+                $('.UV').addClass('medium')
+            }else if (uv > 6 && uv < 8){
+                $('.UV').addClass('high')
+            }else if (uv > 8 || uv < 11){
+                $('.UV').addClass('vHigh')
+            }else {
+                $('.UV').addClass('extreme')
+            }
 
         })
 

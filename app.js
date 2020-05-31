@@ -34,7 +34,30 @@ searchBtn.addEventListener("click", function(){
         $(".tempF").text('Temperature (F): ' + tempF.toFixed(2));
         $(".humidity").text('Humidity: ' + response.main.humidity + "%");
         $(".wind").text('Wind speed: ' + response.wind.speed + " MPH");
-        $(".UV").text('UV Index: ');
+
+        //setting longitude and lattitude coordinates to use UV API
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
+        
+        //setting variable for UV URL
+        let uvURL = 'http://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
+
+        //ajax request for UV data
+        $.ajax({
+            url: uvURL,
+            method: 'GET'
+        }).then(function(uvresponse){
+
+            let uv = uvresponse.value;
+
+            //adding UV data to current weather information
+            $(".UV").text('UV Index: ' + uv);
+
+            
+
+        })
+
+
     });
 
     //creating variable for 5-day forecast API

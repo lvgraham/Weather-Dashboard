@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", function(){
     //setting apikey variable
     const APIKey = "d367dcfadab5440b10dca09382825e01";
     //setting query URL value
-    const queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
     //pulling current weather data from open weather API
     $.ajax({
@@ -40,7 +40,7 @@ searchBtn.addEventListener("click", function(){
         let lon = response.coord.lon;
         
         //setting variable for UV URL
-        let uvURL = 'http://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
+        let uvURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
 
         //ajax request for UV data
         $.ajax({
@@ -72,7 +72,7 @@ searchBtn.addEventListener("click", function(){
     });
 
     //creating variable for 5-day forecast API
-    const queryURL2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+    const queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
     console.log(queryURL2);
 
     //pulling 5-day forecast data
@@ -93,7 +93,7 @@ searchBtn.addEventListener("click", function(){
             $('.day' + i).text((now.format('MM-DD-YYYY')));
 
             //displaying the icons
-            let iconURL = 'http://openweathermap.org/img/wn/';
+            let iconURL = 'https://openweathermap.org/img/wn/';
             let icon = iconURL + response.list[i].weather[0].icon + '@2x.png';
             console.log(icon)
             $('.icon' + i).attr('src', icon);

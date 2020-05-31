@@ -3,6 +3,8 @@ let searchBtn = document.querySelector('#searchWeather')
 //need to get the city name from the search bar
 let cityName = document.getElementById('cityName');
 
+
+//search button onclick event
 searchBtn.addEventListener("click", function(){
 
     event.preventDefault();
@@ -15,7 +17,7 @@ searchBtn.addEventListener("click", function(){
     //setting query URL value
     const queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-    //ajax request to open weather
+    //pulling current weather data from open weather API
     $.ajax({
         url:queryURL,
         method:"GET"
@@ -33,51 +35,42 @@ searchBtn.addEventListener("click", function(){
         $(".humidity").text('Humidity: ' + response.main.humidity + "%");
         $(".wind").text('Wind speed: ' + response.wind.speed + " MPH");
         $(".UV").text('UV Index: ');
-    })
+    });
 
     //creating variable for 5-day forecast API
     const queryURL2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
     console.log(queryURL2);
 
+    //pulling 5-day forecast data
     $.ajax({
         url:queryURL2,
         method:"GET"
     }).then(function(response){
         console.log(response);
 
-        //pulling information for 5-day forecast
-        for (let i = 0; i < response.list.length; i ++){
-
-            let now = moment();
-            $('.day' + i).text((now.format('MM-DD-YYYY')));
+        //for loop to add the 5-day forcast to page
+        for (let i=0; i< response.list.length; i++){
 
             //converting temp to F
             let temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
 
+            //showing the future dates
+            let now = moment().add([i+1], 'days');
+            $('.day' + i).text((now.format('MM-DD-YYYY')));
+
+            //displaying the icons
+            let iconURL = 'http://openweathermap.org/img/wn/';
+            let icon = iconURL + response.list[i].weather[0].icon + '@2x.png';
+            console.log(icon)
+            $('.icon' + i).attr('src', icon);
+
+            //adding the temperatures + humidity
             $('.temp' + i).text('Temp (F): ' + temp.toFixed(2));
             $('.humid' + i).text('Humidity: ' + response.list[i].main.humidity + '%');
             // $('.temp' + i).text(response.list[i].main.temp );
+
         }
-
-       
-
-
-
     });
-    //     //using moment.js to get current date
-    //     let now = moment();
-    //     //converting kelvin temp to farenheight
-    //     let tempF = (response.main.temp - 273.15) * 1.80 + 32;
-
-    //     //adding city, temp, humidity, wind, and UV
-    //     $(".city").html('<h2>' + response.name + " (" + now.format('MM-DD-YYYY') + ") </h2>");
-    //     $(".tempF").text('Temperature (F): ' + tempF.toFixed(2));
-    //     $(".humidity").text('Humidity: ' + response.main.humidity + "%");
-    //     $(".wind").text('Wind speed: ' + response.wind.speed + " MPH");
-    //     $(".UV").text('UV Index: ');
-    // })
-
-
 });
 
 

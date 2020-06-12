@@ -3,6 +3,81 @@ let searchBtn = document.querySelector('#searchWeather')
 //need to get the city name from the search bar
 let cityName = document.getElementById('cityName');
 
+//defining an array to store previous searches
+let prevSearches = []
+console.log(prevSearches)
+
+//bringing up last searches//
+
+$(document).ready(function(){
+    if (localStorage.getItem("previousSearches")){
+        prevSearches = JSON.parse(localStorage.getItem("previousSearches"))
+    }
+
+    let searchedCity = $('<div>'); 
+        searchedCity.text(prevSearches[0])
+
+ 
+    const APIKey = "d367dcfadab5440b10dca09382825e01";
+    //setting query URL value
+    const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + prevSearches[0] + "&appid=" + APIKey;
+
+    $.ajax({
+        url:queryURL,
+        method:"GET"
+    }).then(function(response){
+
+        //using moment.js to get current date
+        let now = moment();
+        //converting kelvin temp to farenheight
+        let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+
+        //adding city, temp, humidity, wind, and UV
+        $(".city").html('<h2>' + response.name + " (" + now.format('MM-DD-YYYY') + ") </h2>");
+        $(".tempF").text('Temperature (F): ' + tempF.toFixed(2));
+        $(".humidity").text('Humidity: ' + response.main.humidity + "%");
+        $(".wind").text('Wind speed: ' + response.wind.speed + " MPH");
+
+        //setting longitude and lattitude coordinates to use UV API
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
+                
+        //setting variable for UV URL
+        let uvURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
+
+        //ajax request for UV data
+        $.ajax({
+            url: uvURL,
+            method: 'GET'
+        }).then(function(uvresponse){
+
+            let uv = uvresponse.value;
+
+            //adding UV data to current weather information
+            $(".uvText").text('UV Index: ');
+            $('.UV').html(uv);
+
+            if (uv < 3){
+                $('.UV').addClass('low')
+            }else if (uv > 3 && uv < 6){
+                $('.UV').addClass('medium')
+            }else if (uv > 6 && uv < 8){
+                $('.UV').addClass('high')
+            }else if (uv > 8 || uv < 11){
+                $('.UV').addClass('vHigh')
+            }else {
+                $('.UV').addClass('extreme')
+            }
+
+        }) 
+
+    })
+})
+
+       
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //search button onclick event
 searchBtn.addEventListener("click", function(){
@@ -11,6 +86,10 @@ searchBtn.addEventListener("click", function(){
 
     //setting city name from value entered in search box
     let city = cityName.value;
+
+    if (!prevSearches.includes(city)){
+        prevSearches.push(city);
+    }
 
     //setting apikey variable
     const APIKey = "d367dcfadab5440b10dca09382825e01";
@@ -22,7 +101,6 @@ searchBtn.addEventListener("click", function(){
         url:queryURL,
         method:"GET"
     }).then(function(response){
-        console.log(response);
 
         //using moment.js to get current date
         let now = moment();
@@ -68,8 +146,81 @@ searchBtn.addEventListener("click", function(){
 
         })
 
-
+        $("#searched-cities").empty()
     });
+    
+    //     for (let i=0; i < prevSearches.length; i++){
+
+    //         searchedCity.on("click", function(){
+    //             let searchedCity = $('<div>'); 
+    //             searchedCity.text(prevSearches[0])
+
+ 
+    //             const APIKey = "d367dcfadab5440b10dca09382825e01";
+    //             //setting query URL value
+    //             const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + prevSearches[0] + "&appid=" + APIKey;
+
+    //             $.ajax({
+    //                 url:queryURL,
+    //                 method:"GET"
+    //             }).then(function(response){
+
+    //                 //using moment.js to get current date
+    //                 let now = moment();
+    //                 //converting kelvin temp to farenheight
+    //                 let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+
+    //                 //adding city, temp, humidity, wind, and UV
+    //                 $(".city").html('<h2>' + response.name + " (" + now.format('MM-DD-YYYY') + ") </h2>");
+    //                 $(".tempF").text('Temperature (F): ' + tempF.toFixed(2));
+    //                 $(".humidity").text('Humidity: ' + response.main.humidity + "%");
+    //                 $(".wind").text('Wind speed: ' + response.wind.speed + " MPH");
+
+    //                 //setting longitude and lattitude coordinates to use UV API
+    //                 let lat = response.coord.lat;
+    //                 let lon = response.coord.lon;
+                
+    //                 //setting variable for UV URL
+    //                 let uvURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
+
+    //                 //ajax request for UV data
+    //                 $.ajax({
+    //                     url: uvURL,
+    //                     method: 'GET'
+    //                 }).then(function(uvresponse){
+
+    //                     let uv = uvresponse.value;
+
+    //                     //adding UV data to current weather information
+    //                     $(".uvText").text('UV Index: ');
+    //                     $('.UV').html(uv);
+
+    //                     if (uv < 3){
+    //                         $('.UV').addClass('low')
+    //                     }else if (uv > 3 && uv < 6){
+    //                         $('.UV').addClass('medium')
+    //                     }else if (uv > 6 && uv < 8){
+    //                         $('.UV').addClass('high')
+    //                     }else if (uv > 8 || uv < 11){
+    //                         $('.UV').addClass('vHigh')
+    //                     }else {
+    //                         $('.UV').addClass('extreme')
+    //                     }
+    //                 });   
+    //             });
+    //         } 
+    //     });  
+
+
+    //    //local storage// 
+    //     window.localStorage.setItem("previousSearches", JSON.stringify(prevSearches))
+    // });
+
+
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
 
     //creating variable for 5-day forecast API
     const queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
@@ -106,7 +257,3 @@ searchBtn.addEventListener("click", function(){
         }
     });
 });
-
-
-
-   

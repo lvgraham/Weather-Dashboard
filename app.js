@@ -182,18 +182,12 @@ searchBtn.addEventListener("click", function(){
         $("#searched-cities").empty()
 
         for(let i=0; i < prevSearches.length; i++){
-
             console.log("prev search", prevSearches);
             let searchedCity = $('<div>'); 
             searchedCity.text(prevSearches[i])
             $("#searched-cities").append(searchedCity)
 
         }
-
-            console.log("prev search", prevSearches);
-            let searchedCity = $('<div>'); 
-            searchedCity.text(prevSearches[i])
-            $("#searched-cities").append(searchedCity)
     
 
         //local storage// 
